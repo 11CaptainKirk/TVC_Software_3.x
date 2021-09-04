@@ -22,4 +22,10 @@ typedef enum
     ERROR_OTHER
 } SystemState;
 
+typedef enum
+{
+    SETUP,
+    LOOP
+} FunctionMode;
+
 #endif
