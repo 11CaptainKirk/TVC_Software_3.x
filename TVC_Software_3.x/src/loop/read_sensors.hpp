@@ -1,11 +1,12 @@
-#include "data_class.h"
+#include "telemetry.h"
 
-SensorData data;
+Telemetry telemetry;
 
-void read_sensors(){
+void read_sensors()
+{
 
-    data.rawEuler->x = 0;
-    data.rawEuler->y = 0;
-    data.rawEuler->z = 0;
-    data.Euler.x;
+    // telemetry.bno055_0.rawEuler->x = 0;
+    // data.IMU0.rawEuler->y = 0;
+    //  data.rawEuler->z = 0;
+    // data.Euler.x;
 }

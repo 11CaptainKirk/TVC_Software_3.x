@@ -1,8 +1,7 @@
 #include <Arduino.h>
 #include <system_state.h>
 
-SystemState systemState;  
-
+SystemState systemState;
 
 static SystemState stateMachine(SystemState systemState)
 {
@@ -45,9 +44,9 @@ static SystemState stateMachine(SystemState systemState)
     return systemState;
 }
 
-void inFlight(){
-
+void inFlight()
+{
 }
-void ground(){
-
+void ground()
+{
 }
