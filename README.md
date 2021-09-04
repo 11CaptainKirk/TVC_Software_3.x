@@ -2,7 +2,7 @@
 
 > ***Avionics Software for Entropy Rocket***
 > - Model Scale Rocket w/ Solid Apogee F-10 Motor
-> - Sub-500G Mass
+> - Sub-500g Mass
 > - Custom PCB
 >   - Primary IMU: **BNO055** 
 >   - Secondary IMU: **MPU9250**
