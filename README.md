@@ -1,6 +1,6 @@
 # TVC Software 3.x
 
-> Avionics Software for Entropy Rocket
+> ***Avionics Software for Entropy Rocket***
 > - Model Scale Rocket w/ Solid Apogee F-10 Motor
 > - Sub-500G Mass
 > - Custom PCB
