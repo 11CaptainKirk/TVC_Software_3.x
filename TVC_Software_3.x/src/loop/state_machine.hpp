@@ -1,41 +1,53 @@
 #include <Arduino.h>
+#include <system_state.h>
 
-void stateMachine(int systemState)
+SystemState systemState;  
+
+
+static SystemState stateMachine(SystemState systemState)
 {
     switch (systemState)
     {
-    case 0:
+    case INITIALIZING:
         // Initializing ( Not Ready )
         break;
-    case 1:
+    case GROUND_IDLE:
         // Ground Idle ( Ready For Flight )
         break;
-    case 2:
-        // System Armed ( Waiting for Liftoff )
+    case COUNTDOWN:
+        // Countdown ( Armed and Waiting for Liftoff )
         break;
-    case 3:
+    case POWERED_ASCENT:
         // Takeoff ( Powered Ascent  |  a > 0  |  v > 0  )
         break;
-    case 4:
+    case APOGEE:
         // Motor Burnout ( Unpowered Ascent  |  a < 0  |  v > 0  )
         break;
-    case 5:
+    case BALLISTIC_DESCENT:
         // Apogee ( Max Altitude  |  a = 0  |  v = 0  )
         break;
-    case 6:
+    case DROGUE_CHUTE_DESCENT:
         // Ballistic Descent ( No Deployment  |  a < 0  |  v < 0  )
         break;
-    case 7:
+    case MAIN_CHUTE_DESCENT:
         // Drogue Chute Descent ( Drogue Deployment  |  a > 0  |  v < 0  )
         break;
-    case 8:
+    case TOUCHDOWN:
         // Main Chute Descent ( Main Deployment  |  a > 0  |  v < 0  )
         break;
-    case 9:
+    case ERROR_IMU:
         // Main Chute Descent ( Main Deployment  |  a > 0  |  v < 0  )
         break;
     default:
         // code block
         Serial.println("TEST");
     }
+    return systemState;
+}
+
+void inFlight(){
+
+}
+void ground(){
+
 }

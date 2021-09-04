@@ -1,10 +1,5 @@
 
 
-struct SensorData
-{
-    IMU IMU0;
-};
-
 class IMU
 {
     struct Axes
@@ -16,7 +11,53 @@ class IMU
     };
 
 public:
-    Axes rawEuler0; // IMU 0
-    Axes rawEuler1; // IMU 1
-    Axes rawEuler2;
+    Axes rawEuler;
+    Axes processedEuler;
+    Axes rawQuaternion;
+    Axes processedQuaternion;
+};
+
+class Barometer
+{
+    struct BarometerValues
+    {
+        float pressure;
+        float temperature;
+        float altitude;
+    };
+
+public:
+    BarometerValues rawValues;
+    BarometerValues processedValues;
+};
+
+class GPS
+{
+    struct GPSPosition
+    {
+        float lattitude;
+        float longitude;
+        float altitude;
+    };
+    struct GPSTime
+    {
+        float year;
+        float month;
+        float day;
+        float hour;
+        float minute;
+        float second;
+    };
+
+public:
+    GPSPosition position;
+    GPSTime time;
+};
+
+struct Telemetry
+{
+    IMU bno055_0;
+    IMU bno055_1;
+    Barometer bmp180;
+    GPS neo6m;
 };
