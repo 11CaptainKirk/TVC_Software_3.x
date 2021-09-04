@@ -1,6 +1,8 @@
-# TVC Software 3.X
+# **TVC Software 3.X**
 #### `Current: 3.0.1`
 
+
+>
 > ***Avionics Software for Entropy Rocket***
 > - Model Scale Rocket w/ Solid Apogee F-10 Motor
 > - Sub-500g Mass
@@ -16,7 +18,7 @@
 > - 3D Printed Vectoring Assembly
 > - Servo-Driven Motor Mount (+/- 12°)
 
-#### ROBERT J. KIRK  ~  Sept. 4, 2021
+#### `ROBERT J. KIRK  ~  Sept. 4, 2021`
  
 ___
 **File Structure:**
