@@ -1,8 +1,12 @@
 # TVC Software 3.x
 
 > Avionics Software for Entropy Rocket
-> - Supports Full Thrust Vectoring of Model Scale Rocket with Solid Motors
-> - Realtime Data Logging & PID Controlled Vectoring
+> - Model Scale Rocket w/ Solid Apogee F-10 Motor
+> - Sub-500G Mass
+> - Realtime Data Logging to SD Card
+> - PID Controlled Vectoring
+> - Matlab Simulink Autotune-Derived PID Values
+> - 
 
 ***ROBERT J. KIRK  ~  Sept. 4, 2021***
  
