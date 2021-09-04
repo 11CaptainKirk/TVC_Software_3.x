@@ -1,4 +1,5 @@
-# TVC Software 3.x
+# TVC Software 3.X
+#### `Current: 3.0.1`
 
 > ***Avionics Software for Entropy Rocket***
 > - Model Scale Rocket w/ Solid Apogee F-10 Motor
