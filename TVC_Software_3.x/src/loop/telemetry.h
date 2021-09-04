@@ -1,4 +1,6 @@
-
+// TODO: FIX PERMISSIONS; Classes should be nested inside of master class not struct. (Problem with pointers for access)
+#ifndef TELEMETRY_H
+#define TELEMETRY_H
 
 class IMU
 {
@@ -61,3 +63,5 @@ struct Telemetry
     Barometer bmp180;
     GPS neo6m;
 };
+
+#endif
