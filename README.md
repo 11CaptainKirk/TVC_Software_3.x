@@ -12,7 +12,8 @@
 > - Realtime Data Logging to SD Card
 > - PID Controlled Vectoring
 > - Matlab Simulink Autotune-Derived PID Values
-> - 
+> - 3D Printed Vectoring Assembly
+> - Servo-Driven Motor Mount (+/- 12°)
 
 ***ROBERT J. KIRK  ~  Sept. 4, 2021***
  
