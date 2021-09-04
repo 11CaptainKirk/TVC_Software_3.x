@@ -15,7 +15,7 @@
 > - 3D Printed Vectoring Assembly
 > - Servo-Driven Motor Mount (+/- 12°)
 
-## ROBERT J. KIRK  ~  Sept. 4, 2021
+#### ROBERT J. KIRK  ~  Sept. 4, 2021
  
 ___
 **File Structure:**
