@@ -3,6 +3,7 @@
 > Avionics Software for Entropy Rocket
 > - Model Scale Rocket w/ Solid Apogee F-10 Motor
 > - Sub-500G Mass
+> - Custom SMD PCB
 > - Realtime Data Logging to SD Card
 > - PID Controlled Vectoring
 > - Matlab Simulink Autotune-Derived PID Values
