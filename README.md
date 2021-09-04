@@ -5,6 +5,8 @@
 > - Sub-500G Mass
 > - Custom SMD PCB
 >   - Primary IMU: **BNO055** 
+>   - Secondary IMU: **MPU9250**
+>   - Primary Barometer: **BMP180**
 > - Realtime Data Logging to SD Card
 > - PID Controlled Vectoring
 > - Matlab Simulink Autotune-Derived PID Values
