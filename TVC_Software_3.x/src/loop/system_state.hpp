@@ -36,7 +36,6 @@ void stateMachine(int systemState)
         break;
     default:
         // code block
-
         Serial.println("TEST");
     }
 }

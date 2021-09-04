@@ -2,16 +2,15 @@
 #include "loop/system_state.hpp"
 #include "loop/data_class.h"
 
-class TestClass
-{
-public:
-  int x;
-};
+
+SensorData data;
+
 
 byte systemState = 0;
-
 void setup()
 {
+  int y = data.rawEuler->x;
+  int z = data.Euler.y;
   // put your setup code here, to run once:
 }
 
