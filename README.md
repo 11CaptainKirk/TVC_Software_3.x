@@ -3,10 +3,12 @@
 > Avionics Software for Entropy Rocket
 > - Model Scale Rocket w/ Solid Apogee F-10 Motor
 > - Sub-500G Mass
-> - Custom SMD PCB
+> - Custom PCB
 >   - Primary IMU: **BNO055** 
 >   - Secondary IMU: **MPU9250**
 >   - Primary Barometer: **BMP180**
+>   - GPS: **Neo-6m**
+>   - Microcontroller: **Teensy 4.1**
 > - Realtime Data Logging to SD Card
 > - PID Controlled Vectoring
 > - Matlab Simulink Autotune-Derived PID Values
