@@ -4,7 +4,7 @@
 > - Model Scale Rocket w/ Solid Apogee F-10 Motor
 > - Sub-500g Mass
 > - Custom PCB
->   - Primary IMU: **BNO055** 
+>   - Primary IMU: **BNO055**[^1] 
 >   - Secondary IMU: **MPU9250**
 >   - Primary Barometer: **BMP180**
 >   - GPS: **Neo-6m**
@@ -14,6 +14,9 @@
 > - Matlab Simulink Autotune-Derived PID Values
 > - 3D Printed Vectoring Assembly
 > - Servo-Driven Motor Mount (+/- 12°)
+
+
+[^1] Likely to be replaced by MPU9250
 
 #### ROBERT J. KIRK  ~  Sept. 4, 2021
  
