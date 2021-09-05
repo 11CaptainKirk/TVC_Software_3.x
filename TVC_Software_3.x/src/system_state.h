@@ -4,6 +4,7 @@
 typedef enum
 {
     INITIALIZING,
+    READY,
     GROUND_IDLE,
     COUNTDOWN,
     POWERED_ASCENT,
@@ -13,7 +14,8 @@ typedef enum
     DROGUE_CHUTE_DESCENT,
     MAIN_CHUTE_DESCENT,
     TOUCHDOWN,
-    ERROR_IMU,
+    ERROR_IMU0,
+    ERROR_IMU1,
     ERROR_BARO,
     ERROR_GPS,
     ERROR_SD,

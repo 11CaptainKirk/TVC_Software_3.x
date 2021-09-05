@@ -7,5 +7,10 @@ SystemState systemInit()
 {
     initStatus = INITIALIZING;
 
+    if (bno055_0(SETUP) == READY)
+    {
+        initStatus = GROUND_IDLE;
+    }
+
     return initStatus;
 }

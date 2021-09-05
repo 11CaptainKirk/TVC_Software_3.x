@@ -1,7 +1,8 @@
 #include <Arduino.h>
 #include <system_state.h>
-
-SystemState systemState;
+#include <loop/update_readings.hpp>
+#ifndef STATE_MACHINE_HPP
+#define STATE_MACHINE_HPP
 
 static SystemState stateMachine(SystemState systemState)
 {
@@ -12,6 +13,10 @@ static SystemState stateMachine(SystemState systemState)
         break;
     case GROUND_IDLE:
         // Ground Idle ( Ready For Flight )
+
+        // ! TEMPORARY
+        Serial.println(telemetry.bno055_0.rawEuler.x);
+        // !
         break;
     case COUNTDOWN:
         // Countdown ( Armed and Waiting for Liftoff )
@@ -34,19 +39,20 @@ static SystemState stateMachine(SystemState systemState)
     case TOUCHDOWN:
         // Main Chute Descent ( Main Deployment  |  a > 0  |  v < 0  )
         break;
-    case ERROR_IMU:
-        // Main Chute Descent ( Main Deployment  |  a > 0  |  v < 0  )
-        break;
     default:
-        // code block
+        // THERE IS AN ERROR, CHECK WHAT IT IS
         Serial.println("TEST");
+        // TODO: CHECK FOR ERROR
     }
     return systemState;
 }
 
 void inFlight()
 {
+    readSensors();
 }
 void ground()
 {
 }
+
+#endif

@@ -64,4 +64,7 @@ struct Telemetry
     GPS neo6m;
 };
 
+Telemetry telemetry;
+SystemState systemState;
+
 #endif
