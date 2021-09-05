@@ -40,5 +40,6 @@ SystemState bno055_0(FunctionMode mode)
     else if (mode == LOOP)
     {
         bno055x0Loop();
+        return DATA_OK;
     }
 }

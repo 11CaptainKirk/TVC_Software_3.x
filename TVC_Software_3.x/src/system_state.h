@@ -5,6 +5,7 @@ typedef enum
 {
     INITIALIZING,
     READY,
+    DATA_OK,
     GROUND_IDLE,
     COUNTDOWN,
     POWERED_ASCENT,
