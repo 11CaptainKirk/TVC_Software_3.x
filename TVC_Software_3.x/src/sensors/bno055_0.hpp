@@ -20,7 +20,7 @@ SystemState bno055x0Setup() // Setup function runs during setup in main.
         SystemState stateBno0 = ERROR_IMU0;
         return stateBno0;
     }
-    delay(1000); //TODO: Why this delay?
+    //delay(1000); //TODO: Why this delay?
     bno055x0.setExtCrystalUse(true);
     return READY;
 }

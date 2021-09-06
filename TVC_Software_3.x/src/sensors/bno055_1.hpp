@@ -17,7 +17,7 @@ SystemState bno055x1Setup() // TODO Implement class with private functions so th
         SystemState stateBno1 = ERROR_IMU1;
         return stateBno1;
     }
-    delay(1000); //TODO: Why this delay?
+    //delay(1000); //TODO: Why this delay?
     bno055x1.setExtCrystalUse(true);
     return READY;
 }

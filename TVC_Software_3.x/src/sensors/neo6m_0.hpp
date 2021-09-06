@@ -19,7 +19,7 @@ SystemState neo6mLoop()
     while (Serial1.available() > 0)
         if (gps.encode(Serial1.read()))
         {
-            while (!gpsReady && !gps.location.isValid())
+            while (!gpsReady && !gps.location.isValid())  // Add something to check if the location has not been valid in ~ 5 secs and throw error for warning beeps. 
             {
                 //delay(100);
                 return INITIALIZING;
