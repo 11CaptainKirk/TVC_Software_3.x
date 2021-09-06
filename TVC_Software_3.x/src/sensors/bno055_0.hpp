@@ -12,6 +12,15 @@ PID PIDz(&telemetry.pid.input.z, &telemetry.pid.output.z, &telemetry.pid.terms.s
 
 SystemState bno055x0Setup() // Setup function runs during setup in main.
 {
+    // Setup PID
+    PIDy.SetMode(AUTOMATIC); // Turn PID on
+    PIDz.SetMode(AUTOMATIC);
+    PIDy.SetOutputLimits(-255, 255);
+    PIDz.SetOutputLimits(-255, 255); // Allow Negative Outputs
+    PIDy.SetSampleTime(25);
+    PIDz.SetSampleTime(25); // Increase update frequency (default 200)
+
+    // Setup IMU
     Serial.println("Orientation Sensor #0 Test");
     Serial.println("");
     if (!bno055x0.begin())
@@ -34,8 +43,8 @@ void bno055x0Loop() // Loop function runs during loop in main.
     telemetry.bno055_0.rawEuler.y = IMUreadingx0.orientation.y;
     telemetry.bno055_0.rawEuler.z = IMUreadingx0.orientation.z;
 
-    telemetry.pid.input.y = telemetry.bno055_0.rawEuler.y;
-    telemetry.pid.input.z = telemetry.bno055_0.rawEuler.z;
+    telemetry.pid.input.y = telemetry.bno055_0.rawEuler.y; // Can be removed and variable direct from IMU can be used if memory is an issue.
+    telemetry.pid.input.z = telemetry.bno055_0.rawEuler.z; //  ""       ""
 
     PIDy.Compute();
     PIDz.Compute();
