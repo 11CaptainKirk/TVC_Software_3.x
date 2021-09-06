@@ -20,7 +20,7 @@ SystemState bno055x0Setup() // Setup function runs during setup in main.
     bno055x0.setExtCrystalUse(true);
     return READY;
 }
-void bno055x0Loop()  // Loop function runs during loop in main.
+void bno055x0Loop() // Loop function runs during loop in main.
 {
     // Update Data
     sensors_event_t IMUreadingx0;

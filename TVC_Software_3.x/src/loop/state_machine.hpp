@@ -4,38 +4,49 @@
 #include <loop/write_data.hpp>
 #include <utility/smart_pulse_buzzer.hpp>
 #include <utility/smart_pulse_LED.hpp>
+#include <utility/button_read.hpp>
 
 #ifndef STATE_MACHINE_HPP
 #define STATE_MACHINE_HPP
 
-SystemState inFlight()
+void inFlight()
 {
     writeData();
-    return readSensors();
+    readSensors();
 }
 void ground()
 {
 }
 
-static SystemState stateMachine(SystemState systemState)
+static void stateMachine()
 {
 
     switch (systemState)
     {
     case INITIALIZING:
         // Initializing ( Not Ready )
-        smartPulseLED(35,200,200);
-        return inFlight();
+        smartPulseLED(35, 100, 2000);
+        inFlight();
         break;
     case GROUND_IDLE:
         // Ground Idle ( Ready For Flight )
 
-        smartPulseLED(35,1000,1000, 5);
-        return inFlight();
-     
+        smartPulseLED(35, 1000, 1000);
+        inFlight();
+        if (buttonRead())
+        {
+            systemState = COUNTDOWN;
+        }
+
         break;
     case COUNTDOWN:
         // Countdown ( Armed and Waiting for Liftoff )
+        smartPulseLED(35, 200, 200);
+        inFlight();
+        if (!buttonRead())
+        {
+            systemState = GROUND_IDLE;
+        }
         break;
     case POWERED_ASCENT:
         // Takeoff ( Powered Ascent  |  a > 0  |  v > 0  )
@@ -60,7 +71,6 @@ static SystemState stateMachine(SystemState systemState)
         Serial.println("TEST");
         // TODO: CHECK FOR ERROR
     }
-    return systemState;
 }
 
 #endif

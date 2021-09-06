@@ -28,10 +28,9 @@ void bmp180x0Loop()
     telemetry.bmp180.rawValues.temperature = bmp180.readTemperature();
     telemetry.bmp180.rawValues.altitude = bmp180.readAltitude();
 
-    telemetry.bmp180.processedValues.pressure = bmpKalmanFilter.updateEstimate(telemetry.bmp180.rawValues.pressure); // Is this really needed ? 
+    telemetry.bmp180.processedValues.pressure = bmpKalmanFilter.updateEstimate(telemetry.bmp180.rawValues.pressure);       // Is this really needed ?
     telemetry.bmp180.processedValues.temperature = bmpKalmanFilter.updateEstimate(telemetry.bmp180.rawValues.temperature); // Is this really needed ?
     telemetry.bmp180.processedValues.altitude = bmpKalmanFilter.updateEstimate(telemetry.bmp180.rawValues.altitude);
-
 }
 
 SystemState bmp180_0(FunctionMode mode)

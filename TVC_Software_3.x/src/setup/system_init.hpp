@@ -7,8 +7,9 @@ SystemState systemInit()
 {
     initStatus = INITIALIZING;
 
-    pinMode(23, OUTPUT);
-    pinMode(35, OUTPUT);
+    pinMode(23, OUTPUT);       // Buzzer PinMode
+    pinMode(35, OUTPUT);       // LED PinMode
+    pinMode(39, INPUT_PULLUP); // Button PinMode
 
     Serial.begin(115200);
 
@@ -52,7 +53,6 @@ SystemState systemInit()
     // Setup GPS
     neo6m_0(SETUP);
     //
-
 
     return initStatus;
 }

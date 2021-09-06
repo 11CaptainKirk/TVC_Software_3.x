@@ -15,11 +15,11 @@ void neo6mSetup()
 
 SystemState neo6mLoop()
 {
-
+    static bool gpsReady = false;
     while (Serial1.available() > 0)
         if (gps.encode(Serial1.read()))
         {
-            while (!gps.location.isValid())
+            while (!gpsReady && !gps.location.isValid())
             {
                 //delay(100);
                 return INITIALIZING;
@@ -38,15 +38,15 @@ SystemState neo6mLoop()
                 telemetry.neo6m.time.hour = gps.time.hour();
                 telemetry.neo6m.time.minute = gps.time.minute();
                 telemetry.neo6m.time.second = gps.time.second();
+                gpsReady = true;
                 return READY;
             }
         }
-    if (millis() > 5000 && gps.charsProcessed() < 10)
+    if (millis() > 5000 && gps.charsProcessed() < 10) // TODO: Problem because it takes longer to get through setup
     {
         Serial.println(F("** NEO-6M GPS ERROR **\t\t<<"));
         return ERROR_GPS;
     }
-
 }
 
 SystemState neo6m_0(FunctionMode mode)

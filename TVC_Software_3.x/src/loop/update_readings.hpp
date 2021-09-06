@@ -5,7 +5,7 @@
 #ifndef UPDATE_READINGS_HPP
 #define UPDATE_READINGS_HPP
 
-SystemState readSensors()
+void readSensors()
 {
     bno055_0(LOOP);
     bno055_1(LOOP);
@@ -13,11 +13,11 @@ SystemState readSensors()
 
     if (systemState == INITIALIZING && neo6m_0(LOOP) == READY)
     {
-        return GROUND_IDLE;
+        systemState = GROUND_IDLE;
     };
     if (systemState == GROUND_IDLE && neo6m_0(LOOP) == INITIALIZING)
     {
-        return INITIALIZING;
+        systemState = INITIALIZING;
     };
 }
 #endif
