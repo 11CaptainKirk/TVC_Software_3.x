@@ -6,7 +6,6 @@
 #include <telemetry.h>
 #include <utility/servo_init.hpp>
 
-
 SystemState servoSetup()
 {
 
@@ -18,12 +17,37 @@ SystemState servoSetup()
 
     servoInit();
 
-
     return READY;
 }
 void servoLoop()
 {
-    // Set New Values to telemetry object.
+    // Update Servo Locations
+    if (telemetry.pid.output.y > 10)  // Update Y Servo
+    {
+        servoY.write(telemetry.utility.home.gimbalOffsetY + telemetry.utility.home.gimbalMaxY);
+    }
+    else if (telemetry.pid.output.y < -10)
+    {
+        servoY.write(telemetry.utility.home.gimbalOffsetY - telemetry.utility.home.gimbalMaxY);
+    }
+    else
+    {
+        servoY.write(telemetry.utility.home.gimbalOffsetY + telemetry.pid.output.y);
+    }
+
+
+     if (telemetry.pid.output.z > 10)  // Update Z Servo
+    {
+        servoZ.write(telemetry.utility.home.gimbalOffsetZ + telemetry.utility.home.gimbalMaxZ);
+    }
+    else if (telemetry.pid.output.z < -10)
+    {
+        servoZ.write(telemetry.utility.home.gimbalOffsetZ - telemetry.utility.home.gimbalMaxZ);
+    }
+    else
+    {
+        servoZ.write(telemetry.utility.home.gimbalOffsetZ + telemetry.pid.output.z);
+    }
 }
 
 SystemState servo(FunctionMode mode)

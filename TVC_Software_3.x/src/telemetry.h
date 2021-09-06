@@ -97,6 +97,8 @@ class Utility
     {
         float gimbalOffsetY = 83;
         float gimbalOffsetZ = 84;
+        float gimbalMaxY = 10;
+        float gimbalMaxZ = 10;
         float startAltitude;
     };
 

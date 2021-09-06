@@ -10,16 +10,14 @@ PWMServo servoZ;
 void servoInit()
 {
 
-    int testAngle = 10;
-
-    servoY.write(telemetry.utility.home.gimbalOffsetY + (testAngle)); // Y Plus
+    servoY.write(telemetry.utility.home.gimbalOffsetY + (telemetry.utility.home.gimbalMaxY)); // Y Plus
     delay(400);
-    servoY.write(telemetry.utility.home.gimbalOffsetY - (testAngle)); // Y Minus
+    servoY.write(telemetry.utility.home.gimbalOffsetY - (telemetry.utility.home.gimbalMaxY)); // Y Minus
     delay(400);
-    servoY.write(telemetry.utility.home.gimbalOffsetY); // Y Reset
-    servoZ.write(telemetry.utility.home.gimbalOffsetZ + (testAngle)); // Z Plus
+    servoY.write(telemetry.utility.home.gimbalOffsetY);                                       // Y Reset
+    servoZ.write(telemetry.utility.home.gimbalOffsetZ + (telemetry.utility.home.gimbalMaxZ)); // Z Plus
     delay(400);
-    servoZ.write(telemetry.utility.home.gimbalOffsetZ - (testAngle)); // Z Minus
+    servoZ.write(telemetry.utility.home.gimbalOffsetZ - (telemetry.utility.home.gimbalMaxZ)); // Z Minus
     delay(400);
     servoZ.write(telemetry.utility.home.gimbalOffsetZ); // Z Reset
 }
