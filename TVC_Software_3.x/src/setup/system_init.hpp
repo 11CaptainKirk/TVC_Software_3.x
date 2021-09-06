@@ -48,5 +48,11 @@ SystemState systemInit()
     else
         initStatus = GROUND_IDLE;
     //
+
+    // Setup GPS
+    neo6m_0(SETUP);
+    //
+
+
     return initStatus;
 }

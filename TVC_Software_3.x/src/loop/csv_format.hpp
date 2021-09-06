@@ -20,7 +20,7 @@ public:
     String dataStringCSV()
     {
         String dataOut =
-            String(*IMU0rX, 4) + "," + String(*IMU0rY, 4) + "," + String(*IMU0rZ, 4) + "," + String(*IMU1rX, 4) + "," + String(*IMU1rY, 4) + "," + String(*IMU1rZ, 4) + "," + String(*BNO0rA, 4) + "," + String(*BNO0pA, 4);
+            String(*IMU0rX, 4) + "," + String(*IMU0rY, 4) + "," + String(*IMU0rZ, 4) + "," + String(*IMU1rX, 4) + "," + String(*IMU1rY, 4) + "," + String(*IMU1rZ, 4) + "," + String(*BNO0rA, 4) + "," + String(*BNO0pA, 4) + "," + String(telemetry.neo6m.position.lattitude, 4) + "," + String(telemetry.neo6m.position.longitude, 4) + "," + String(systemState);
         return dataOut;
     }
 };

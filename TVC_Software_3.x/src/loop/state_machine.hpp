@@ -8,10 +8,10 @@
 #ifndef STATE_MACHINE_HPP
 #define STATE_MACHINE_HPP
 
-void inFlight()
+SystemState inFlight()
 {
-    readSensors();
     writeData();
+    return readSensors();
 }
 void ground()
 {
@@ -24,21 +24,15 @@ static SystemState stateMachine(SystemState systemState)
     {
     case INITIALIZING:
         // Initializing ( Not Ready )
+        smartPulseLED(35,200,200);
+        return inFlight();
         break;
     case GROUND_IDLE:
         // Ground Idle ( Ready For Flight )
 
-        // ! TEMPORARY
-        inFlight();
-        smartPulseBuzzer(23,1000,1000, 5);
         smartPulseLED(35,1000,1000, 5);
-       // digitalWrite(23, LOW);
-        //delay(1000);
-        //digitalWrite(23, HIGH);
-        //delay(1000);
-        //digitalWrite(35, LOW);
-        //Serial.println(telemetry.bno055_0.rawEuler.x);
-        // !
+        return inFlight();
+     
         break;
     case COUNTDOWN:
         // Countdown ( Armed and Waiting for Liftoff )

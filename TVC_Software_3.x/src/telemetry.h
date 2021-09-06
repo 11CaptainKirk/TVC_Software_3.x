@@ -50,10 +50,16 @@ class GPS
         byte minute;
         byte second;
     };
+    struct GPSMisc
+    {
+        short numSats;
+        short dataAge;
+    };
 
 public:
     GPSPosition position;
     GPSTime time;
+    GPSMisc misc;
 };
 
 struct Telemetry
