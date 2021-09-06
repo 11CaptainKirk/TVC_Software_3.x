@@ -1,11 +1,25 @@
 #include <Arduino.h>
 #include <system_state.h>
 #include <loop/update_readings.hpp>
+#include <loop/write_data.hpp>
+#include <utility/smart_pulse_buzzer.hpp>
+#include <utility/smart_pulse_LED.hpp>
+
 #ifndef STATE_MACHINE_HPP
 #define STATE_MACHINE_HPP
 
+void inFlight()
+{
+    readSensors();
+    writeData();
+}
+void ground()
+{
+}
+
 static SystemState stateMachine(SystemState systemState)
 {
+
     switch (systemState)
     {
     case INITIALIZING:
@@ -15,7 +29,15 @@ static SystemState stateMachine(SystemState systemState)
         // Ground Idle ( Ready For Flight )
 
         // ! TEMPORARY
-        Serial.println(telemetry.bno055_0.rawEuler.x);
+        inFlight();
+        smartPulseBuzzer(23,1000,1000, 5);
+        smartPulseLED(35,1000,1000, 5);
+       // digitalWrite(23, LOW);
+        //delay(1000);
+        //digitalWrite(23, HIGH);
+        //delay(1000);
+        //digitalWrite(35, LOW);
+        //Serial.println(telemetry.bno055_0.rawEuler.x);
         // !
         break;
     case COUNTDOWN:
@@ -45,14 +67,6 @@ static SystemState stateMachine(SystemState systemState)
         // TODO: CHECK FOR ERROR
     }
     return systemState;
-}
-
-void inFlight()
-{
-    readSensors();
-}
-void ground()
-{
 }
 
 #endif

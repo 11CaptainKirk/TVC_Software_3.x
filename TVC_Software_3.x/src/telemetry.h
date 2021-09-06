@@ -6,10 +6,10 @@ class IMU
 {
     struct Axes
     {
-        float x;
-        float y;
-        float z;
-        float w;
+        double x;
+        double y;
+        double z;
+        double w;
     };
 
 public:
@@ -23,9 +23,9 @@ class Barometer
 {
     struct BarometerValues
     {
-        float pressure;
-        float temperature;
-        float altitude;
+        double pressure;
+        double temperature;
+        double altitude;
     };
 
 public:
@@ -37,18 +37,18 @@ class GPS
 {
     struct GPSPosition
     {
-        float lattitude;
-        float longitude;
-        float altitude;
+        double lattitude;
+        double longitude;
+        double altitude;
     };
     struct GPSTime
     {
-        float year;
-        float month;
-        float day;
-        float hour;
-        float minute;
-        float second;
+        short year;
+        byte month;
+        byte day;
+        byte hour;
+        byte minute;
+        byte second;
     };
 
 public:

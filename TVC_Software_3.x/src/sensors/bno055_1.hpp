@@ -6,7 +6,7 @@
 
 Adafruit_BNO055 bno055x1 = Adafruit_BNO055(55, 0x29); // Create IMU Object
 
-void bno055x1Setup() // TODO Implement class with private functions so these ridiculous function names are not needed.
+SystemState bno055x1Setup() // TODO Implement class with private functions so these ridiculous function names are not needed.
 {
 
     Serial.println("Orientation Sensor #1 Test");
@@ -14,10 +14,12 @@ void bno055x1Setup() // TODO Implement class with private functions so these rid
     if (!bno055x1.begin())
     {
         Serial.print("** BNO055 #1 is not detected **\t\t<<");
-        systemState = ERROR_IMU1;
+        SystemState stateBno1 = ERROR_IMU1;
+        return stateBno1;
     }
     delay(1000); //TODO: Why this delay?
     bno055x1.setExtCrystalUse(true);
+    return READY;
 }
 void bno055x1Loop()
 {
@@ -30,7 +32,7 @@ void bno055x1Loop()
     telemetry.bno055_1.rawEuler.z = IMUreadingx1.orientation.z;
 }
 
-void bno055_1(FunctionMode mode)
+SystemState bno055_1(FunctionMode mode)
 {
     if (mode == SETUP)
     {
@@ -39,5 +41,6 @@ void bno055_1(FunctionMode mode)
     else if (mode == LOOP)
     {
         bno055x1Loop();
+        return DATA_OK;
     }
 }

@@ -6,7 +6,7 @@
 
 Adafruit_BNO055 bno055x0 = Adafruit_BNO055(55, 0x28); // Create IMU Object
 
-SystemState bno055x0Setup()
+SystemState bno055x0Setup() // Setup function runs during setup in main.
 {
     Serial.println("Orientation Sensor #0 Test");
     Serial.println("");
@@ -20,7 +20,7 @@ SystemState bno055x0Setup()
     bno055x0.setExtCrystalUse(true);
     return READY;
 }
-void bno055x0Loop()
+void bno055x0Loop()  // Loop function runs during loop in main.
 {
     // Update Data
     sensors_event_t IMUreadingx0;
