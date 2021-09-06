@@ -1,5 +1,6 @@
 #include <cmath>
 #include <telemetry.h>
+#include <Arduino.h>
 
 class QuatCorrect
 {
@@ -60,8 +61,8 @@ public:
         //
         EulerAngles cEuler;
         cEuler = toEulerAngles(correctQuaternion(q1, q2));
-        cEuler.x = telemetry.bno055_0.processedEuler.x;
-        cEuler.y = telemetry.bno055_0.processedEuler.y;
-        cEuler.z = telemetry.bno055_0.processedEuler.z;
+        telemetry.bno055_0.processedEuler.x = cEuler.x*(180/3.14159);
+        telemetry.bno055_0.processedEuler.y = cEuler.y*(180/3.14159);
+        telemetry.bno055_0.processedEuler.z = cEuler.z*(180/3.14159);
     }
 };
