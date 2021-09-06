@@ -19,6 +19,27 @@ public:
     Axes processedQuaternion;
 };
 
+class PIDdata
+{
+    struct PIDoutput
+    {
+        double y;
+        double z;
+    };
+    struct PIDterms
+    {
+        const float p = 1;
+        const float i = 1;
+        const float d = 1;
+        double setpoint = 0;
+    };
+
+public:
+    PIDoutput output;
+    PIDoutput input;
+    PIDterms terms;
+};
+
 class Barometer
 {
     struct BarometerValues
@@ -68,6 +89,7 @@ struct Telemetry
     IMU bno055_1;
     Barometer bmp180;
     GPS neo6m;
+    PIDdata pid;
 };
 
 Telemetry telemetry;
