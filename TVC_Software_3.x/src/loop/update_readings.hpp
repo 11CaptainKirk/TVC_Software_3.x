@@ -21,6 +21,6 @@ void readSensors()
         systemState = INITIALIZING;
     };
 
-    servo(LOOP);
+    //servo(LOOP);
 }
 #endif

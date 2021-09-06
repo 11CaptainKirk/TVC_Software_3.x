@@ -26,12 +26,14 @@ static void stateMachine()
     case INITIALIZING:
         // Initializing ( Not Ready )
         smartPulseLED(35, 100, 2000);
+        smartPulseBuzzer(23, 100, 2000);
         inFlight();
         break;
     case GROUND_IDLE:
         // Ground Idle ( Ready For Flight )
 
         smartPulseLED(35, 1000, 1000);
+        smartPulseBuzzer(23, 1000, 1000);
         inFlight();
         if (buttonRead())
         {
@@ -42,6 +44,7 @@ static void stateMachine()
     case COUNTDOWN:
         // Countdown ( Armed and Waiting for Liftoff )
         smartPulseLED(35, 200, 200);
+        smartPulseBuzzer(23, 200, 200);
         inFlight();
         if (!buttonRead())
         {
