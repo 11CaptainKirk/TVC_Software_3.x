@@ -83,6 +83,28 @@ public:
     GPSMisc misc;
 };
 
+class Utility
+{
+    struct Pinouts // Pin numbers for physical hardware.
+    {
+        const int button = 39;
+        const int led = 35;
+        const int buzzer = 23;
+        const int servoYpin = 4;
+        const int servoZpin = 5;
+    };
+    struct Default // Default values for system
+    {
+        float gimbalOffsetY = 83;
+        float gimbalOffsetZ = 84;
+        float startAltitude;
+    };
+
+public:
+    Pinouts gpio;
+    Default home;
+};
+
 struct Telemetry
 {
     IMU bno055_0;
@@ -90,6 +112,7 @@ struct Telemetry
     Barometer bmp180;
     GPS neo6m;
     PIDdata pid;
+    Utility utility;
 };
 
 Telemetry telemetry;

@@ -54,5 +54,8 @@ SystemState systemInit()
     neo6m_0(SETUP);
     //
 
+    // Setup Servos
+    servo(SETUP);
+
     return initStatus;
 }

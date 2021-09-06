@@ -2,6 +2,7 @@
 #include <sensors/bno055_1.hpp>
 #include <sensors/bmp180_0.hpp>
 #include <sensors/neo6m_0.hpp>
+#include <utility/servo_update.hpp>
 #ifndef UPDATE_READINGS_HPP
 #define UPDATE_READINGS_HPP
 
@@ -19,5 +20,7 @@ void readSensors()
     {
         systemState = INITIALIZING;
     };
+
+    servo(LOOP);
 }
 #endif
