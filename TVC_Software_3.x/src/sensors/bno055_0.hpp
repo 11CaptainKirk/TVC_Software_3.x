@@ -62,8 +62,8 @@ void bno055x0Loop() // Loop function runs during loop in main.
 
     correctedEuler.correctEuler(qx);
 
-    telemetry.pid.input.y = telemetry.bno055_0.rawEuler.y; // Can be removed and variable direct from IMU can be used if memory is an issue.
-    telemetry.pid.input.z = telemetry.bno055_0.rawEuler.z; //  ""       ""
+    telemetry.pid.input.y = telemetry.bno055_0.processedEuler.x; // Can be removed and variable direct from IMU can be used if memory is an issue.
+    telemetry.pid.input.z = telemetry.bno055_0.processedEuler.y; //  ""       ""
 
     PIDy.Compute();
     PIDz.Compute();

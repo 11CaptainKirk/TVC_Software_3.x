@@ -71,7 +71,7 @@ static void stateMachine()
         break;
     default:
         // THERE IS AN ERROR, CHECK WHAT IT IS
-        Serial.println("TEST");
+        Serial.println(systemState);
         // TODO: CHECK FOR ERROR
     }
 }

@@ -37,7 +37,7 @@ private:
 
         // pitch (y-axis rotation)
         double sinp = 2 * (q.w * q.y - q.z * q.x);
-        if (std::abs(sinp) >= 1)
+        if ((std::abs(sinp)) >= 1)
             angles.y = std::copysign(3.14159 / 2, sinp); // use 90 degrees if out of range
         else
             angles.y = std::asin(sinp);

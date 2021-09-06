@@ -29,8 +29,8 @@ class PIDdata
     struct PIDterms
     {
         const float p = 1;
-        const float i = 1;
-        const float d = 1;
+        const float i = 0;
+        const float d = 0;
         double setpoint = 0;
     };
 
