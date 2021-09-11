@@ -7,9 +7,11 @@ SystemState systemInit()
 {
     initStatus = INITIALIZING;
 
-    pinMode(23, OUTPUT);       // Buzzer PinMode
-    pinMode(35, OUTPUT);       // LED PinMode
-    pinMode(39, INPUT_PULLUP); // Button PinMode
+    pinMode(telemetry.utility.gpio.buzzer, OUTPUT);         // Buzzer PinMode
+    pinMode(telemetry.utility.gpio.led, OUTPUT);            // LED PinMode
+    pinMode(telemetry.utility.gpio.button, INPUT_PULLUP);   // Button PinMode
+    pinMode(telemetry.utility.gpio.pyro1, OUTPUT);          // Pyro Pin Mode
+    pinMode(telemetry.utility.gpio.pyro2, OUTPUT);
 
     Serial.begin(115200);
 

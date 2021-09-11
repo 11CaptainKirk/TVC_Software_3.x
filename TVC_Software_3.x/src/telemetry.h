@@ -54,6 +54,7 @@ class Barometer
 public:
     BarometerValues rawValues;
     BarometerValues processedValues;
+    BarometerValues normalizedValues;
 };
 
 class GPS
@@ -94,6 +95,8 @@ class Utility
         const int buzzer = 23;
         const int servoYpin = 4;
         const int servoZpin = 5;
+        const int pyro1 = 41;
+        const int pyro2 = 40;
     };
     struct Default // Default values for system
     {

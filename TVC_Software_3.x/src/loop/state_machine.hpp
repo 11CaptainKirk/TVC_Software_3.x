@@ -5,6 +5,7 @@
 #include <utility/smart_pulse_buzzer.hpp>
 #include <utility/smart_pulse_LED.hpp>
 #include <utility/button_read.hpp>
+#include <utility/ejection.hpp>
 
 #ifndef STATE_MACHINE_HPP
 #define STATE_MACHINE_HPP
@@ -20,6 +21,23 @@ void inFlight()
 }
 void ground()
 {
+}
+void failsafeEjection(){
+    // Failsafe check for ejection (In case the state system does not correctly detect state change, this code will fire ejection charge if simple criteria are met.) 
+        // TODO CHECK THIS (Maybe create new variable that is altitude-startAltitude)
+        if(telemetry.bmp180.normalizedValues.altitude < telemetry.utility.home.ejectionAltitudeMeters + 30){ // Check if rocket is 30m above ejection altitude
+            if (!hasSetEjectionAltitudeDeltaCheck){  // Check if altitude at 30m above ejection has been saved
+            ejectionAltitudeDeltaCheck = telemetry.bmp180.normalizedValues.altitude; // If not, save it.
+            hasSetEjectionAltitudeDeltaCheck = true;  // Set this to true so we don't save again.
+            }
+            if (ejectionAltitudeDeltaCheck - 20 > telemetry.bmp180.normalizedValues.altitude){ // Check if we have fallen more than 20 meters since initial altitude was saved.
+                // ! FIRE EJECTION 
+                fireEjection();
+                // TODO Add ejection code
+                // If so, rocket is below ejection altitude and losing significant altitude over time (in ballistic descent); fire ejection charge.
+            }
+        
+        }
 }
 
 static void stateMachine()
@@ -44,6 +62,12 @@ static void stateMachine()
         // State Change checks
         if (buttonRead())
         {
+            // Set defaults at current position
+            telemetry.utility.home.startY = telemetry.bno055_0.processedEuler.y;
+            telemetry.utility.home.startZ = telemetry.bno055_0.processedEuler.z;
+            telemetry.utility.home.startAltitude = telemetry.bmp180.processedValues.altitude;
+
+            // Change to countdown system state
             systemState = COUNTDOWN;
         }
 
@@ -62,28 +86,9 @@ static void stateMachine()
         {
             systemState = GROUND_IDLE;
         }
-        // Set defaults before flight
-        if (!hasSetDefaults) {  // SET THE INITIAL POSITION / ALTITUDE TO AIM FOR IN FLIGHT
-            telemetry.utility.home.startY = telemetry.bno055_0.processedEuler.y;
-            telemetry.utility.home.startZ = telemetry.bno055_0.processedEuler.z;
-            telemetry.utility.home.startAltitude = telemetry.bmp180.processedValues.altitude;
-            hasSetDefaults = true;
-        }
 
-        // Failsafe check for ejection (In case the state system does not correctly detect state change, this code will fire ejection charge if simple criteria are met.) 
-        // TODO CHECK THIS (Maybe create new variable that is altitude-startAltitude)
-        if(telemetry.bmp180.processedValues.altitude - telemetry.utility.home.startAltitude < telemetry.utility.home.ejectionAltitudeMeters + 30){ // Check if rocket is 30m above ejection altitude
-            if (!hasSetEjectionAltitudeDeltaCheck){  // Check if altitude at 30m above ejection has been saved
-            ejectionAltitudeDeltaCheck = telemetry.bmp180.processedValues.altitude - telemetry.utility.home.startAltitude; // If not, save it.
-            hasSetEjectionAltitudeDeltaCheck = true;  // Set this to true so we don't save again.
-            }
-            if (ejectionAltitudeDeltaCheck - 20 > telemetry.bmp180.processedValues.altitude - telemetry.utility.home.startAltitude){ // Check if we have fallen more than 20 meters since initial altitude was saved.
-                // ! FIRE EJECTION 
-                // TODO Add ejection code
-                // If so, rocket is below ejection altitude and losing significant altitude over time (in ballistic descent); fire ejection charge.
-            }
-        
-        }
+        // Backup ejection code that runs in all states
+        failsafeEjection();
 
         break;
     case POWERED_ASCENT:
