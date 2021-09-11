@@ -20,7 +20,7 @@ float savedAltitude = -1;
 const int poweredAccelThreshold = 50;
 const int unpoweredAccelThreshold = -5;
 const int apogeeDetectAltDelta = 3;
-const int ejectionAltitude;
+const int ejectionAltitude = telemetry.utility.home.ejectionAltitudeMeters;
 
 void inFlight()
 {
@@ -106,6 +106,10 @@ static void stateMachine()
     case POWERED_ASCENT:
         // Takeoff ( Powered Ascent  |  a > 0  |  v > 0  )
 
+        inFlight();
+        servo(LOOP);
+        failsafeEjection();
+
         if (telemetry.bno055_0.rawAccel.x >= poweredAccelThreshold){  // Check to see if motor has burned out
             systemState = UNPOWERED_ASCENT;
         }
@@ -113,6 +117,11 @@ static void stateMachine()
     case UNPOWERED_ASCENT:
         // Motor Burnout ( Unpowered Ascent  |  a < 0  |  v > 0  )
     
+        inFlight();
+        servo(LOOP);
+        failsafeEjection();
+
+
         if (!hasSavedAltitude){   // Save altitude
         savedAltitude = telemetry.bmp180.normalizedValues.altitude;
         hasSavedAltitude = true;
@@ -124,16 +133,33 @@ static void stateMachine()
     case BALLISTIC_DESCENT:
         // Initially at Apogee ( Max Altitude  |  a = 0  |  v = 0  )
 
-        if (telemetry.bmp180.normalizedValues.altitude <= ejectionAltitude){
+        inFlight();
+        failsafeEjection();
+
+
+        if (telemetry.bmp180.normalizedValues.altitude <= ejectionAltitude + 10){ // Add 10 because of deloyment delay
             systemState = DROGUE_CHUTE_DESCENT;
         }
         break;
     case DROGUE_CHUTE_DESCENT:
         // Ballistic Descent ( No Deployment  |  a < 0  |  v < 0  )
+
+        inFlight();
         fireEjection();
+        // ? HOW TO DETECT MAIN CHUTE DEPLOYMENT WITH JOLLY LOGIC?
+
+        if (telemetry.bmp180.normalizedValues.altitude < ejectionAltitude-20){ // Check if rocket is 20m below ejection altitude, if so, move to main chute and initiate failover ejection.
+            systemState = MAIN_CHUTE_DESCENT; // It is not actually in main chute but this is for another failover deployment opportunity.
+        }
+
+        smartPulseLED(35, 50, 50);
+        smartPulseBuzzer(23, 50, 50);
         break;
     case MAIN_CHUTE_DESCENT:
         // Drogue Chute Descent ( Drogue Deployment  |  a > 0  |  v < 0  )
+        failsafeEjection();
+        smartPulseLED(35, 50, 50);
+        smartPulseBuzzer(23, 50, 50);
         break;
     case TOUCHDOWN:
         // Main Chute Descent ( Main Deployment  |  a > 0  |  v < 0  )
