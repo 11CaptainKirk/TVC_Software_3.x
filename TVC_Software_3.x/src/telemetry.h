@@ -101,6 +101,8 @@ class Utility
         float gimbalMaxY = 10;
         float gimbalMaxZ = 10;
         float startAltitude;
+        float startY;
+        float startZ;
     };
 
 public:
