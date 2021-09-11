@@ -20,7 +20,7 @@ public:
     String dataStringCSV()
     {
         String dataOut =
-                    String(millis(), 4)                                 // MS since power on
+                    String(millis())                                 // MS since power on
             + "," + String(telemetry.utility.time.month)                // Current Date / Time 
             + "/" + String(telemetry.utility.time.day)    
             + "/" + String(telemetry.utility.time.year) 
@@ -30,7 +30,7 @@ public:
             + "," + String(systemState)                                 // Current system state
             + "," + String(telemetry.bno055_0.normalizedEuler.y)        // Normalized Eulers (corrected & zeroed)
             + "," + String(telemetry.bno055_0.normalizedEuler.z) 
-            + "," + String(telemetry.bmp180.processedValues.altitude)   // Filtered Barometric altitude
+            + "," + String(telemetry.bmp180.normalizedValues.altitude)   // Filtered Barometric altitude
             + "," + String(telemetry.bmp180.rawValues.temperature)      // Temperature
             + "," + String(telemetry.neo6m.position.lattitude)          // GPS Coordinates
             + "," + String(telemetry.neo6m.position.longitude)

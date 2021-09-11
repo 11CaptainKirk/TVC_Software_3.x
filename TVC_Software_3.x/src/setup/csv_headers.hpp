@@ -3,37 +3,41 @@
 
 
 void csvHeaderPrint() {
-    Serial.print(F("Millis"));
+    Serial.print(F("Millis")); //
     Serial.print(F(","));
-    Serial.print(F("Date/Time"));
+    Serial.print(F("Date/Time")); //
     Serial.print(F(","));
-    Serial.print(F("System Status"));
+    Serial.print(F("System Status")); //
     Serial.print(F(","));
-    Serial.print(F("Corrected Euler X"));
+    Serial.print(F("Normalized Euler Y")); //
     Serial.print(F(","));
-    Serial.print(F("Corrected Euler Y"));
+    Serial.print(F("Normalized Euler Z")); //
     Serial.print(F(","));
-    Serial.print(F("Filtered Altitude"));
+    Serial.print(F("Filtered Altitude")); //
     Serial.print(F(","));
-    Serial.print(F("Temperature"));
+    Serial.print(F("Temperature")); //
     Serial.print(F(","));
-    Serial.print(F("Lattitude"));
+    Serial.print(F("Lattitude")); //
     Serial.print(F(","));
-    Serial.print(F("Longitude"));
+    Serial.print(F("Longitude")); //
     Serial.print(F(","));
-    Serial.print(F("GPS Altitude"));
+    Serial.print(F("GPS Altitude")); //
     Serial.print(F(","));
-    Serial.print(F("Sat Fix"));
+    Serial.print(F("Sat Fix #")); //
     Serial.print(F(","));
-    Serial.print(F("Pyro 1 Status")); 
+    Serial.print(F("Pyro 1 Status"));  //
     Serial.print(F(","));
-    Serial.print(F("Pyro 2 Status"));
+    Serial.print(F("Pyro 2 Status"));  //
     Serial.print(F(","));
     Serial.print(F("Raw Euler X"));
     Serial.print(F(","));
     Serial.print(F("Raw Euler Y")); 
     Serial.print(F(","));
     Serial.print(F("Raw Euler Z"));
+    Serial.print(F(","));
+    Serial.print(F("Corrected Euler X"));
+    Serial.print(F(","));
+    Serial.print(F("Corrected Euler Y"));
     Serial.print(F(","));
     Serial.print(F("Quaternion X"));
     Serial.print(F(","));
