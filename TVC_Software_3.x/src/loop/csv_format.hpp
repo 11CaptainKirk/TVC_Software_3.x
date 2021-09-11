@@ -20,17 +20,24 @@ public:
     String dataStringCSV()
     {
         String dataOut =
-                    String(*IMU0rX, 4) 
-            + "," + String(*IMU0rY, 4) 
-            + "," + String(*IMU0rZ, 4) 
-            + "," + String(*IMU0pX, 4) 
-            + "," + String(*IMU0pY, 4) 
-            + "," + String(*IMU0pZ, 4) 
-            + "," + String(*BNO0rA, 4) 
-            + "," + String(*BNO0pA, 4) 
-            + "," + String(telemetry.neo6m.position.lattitude, 4) 
-            + "," + String(telemetry.neo6m.position.longitude, 4) 
-            + "," + String(systemState);
+                    String(millis(), 4)                                 // MS since power on
+            + "," + String(telemetry.utility.time.month)                // Current Date / Time 
+            + "/" + String(telemetry.utility.time.day)    
+            + "/" + String(telemetry.utility.time.year) 
+            + " " + String(telemetry.utility.time.hour) 
+            + ":" + String(telemetry.utility.time.minute) 
+            + ":" + String(telemetry.utility.time.second) 
+            + "," + String(systemState)                                 // Current system state
+            + "," + String(telemetry.bno055_0.normalizedEuler.y)        // Normalized Eulers (corrected & zeroed)
+            + "," + String(telemetry.bno055_0.normalizedEuler.z) 
+            + "," + String(telemetry.bmp180.processedValues.altitude)   // Filtered Barometric altitude
+            + "," + String(telemetry.bmp180.rawValues.temperature)      // Temperature
+            + "," + String(telemetry.neo6m.position.lattitude)          // GPS Coordinates
+            + "," + String(telemetry.neo6m.position.longitude)
+            + "," + String(telemetry.neo6m.position.altitude)           // GPS Altitude
+            + "," + String(telemetry.neo6m.misc.numSats)                // Number of Sattelite fixes
+            + "," + String(telemetry.utility.home.pyro1Status)          // Pyro channel status
+            + "," + String(telemetry.utility.home.pyro2Status);
         return dataOut;
     }
 };

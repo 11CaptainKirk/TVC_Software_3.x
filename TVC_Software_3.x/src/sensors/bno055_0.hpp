@@ -44,21 +44,21 @@ void bno055x0Loop() // Loop function runs during loop in main.
 
     imu::Quaternion quat = bno055x0.getQuat();
     // Set Values to telemetry object.
-    telemetry.bno055_0.rawEuler.x = IMUreadingx0.orientation.x;
+    telemetry.bno055_0.rawEuler.x = IMUreadingx0.orientation.x;  // Get orientation readings (Euler [not usable because of gimbal lock])
     telemetry.bno055_0.rawEuler.y = IMUreadingx0.orientation.y;
     telemetry.bno055_0.rawEuler.z = IMUreadingx0.orientation.z;
 
-    telemetry.bno055_0.rawAccel.x = IMUreadingx0.acceleration.x;
+    telemetry.bno055_0.rawAccel.x = IMUreadingx0.acceleration.x; // Get acceleration Readings
     telemetry.bno055_0.rawAccel.y = IMUreadingx0.acceleration.y;
     telemetry.bno055_0.rawAccel.z = IMUreadingx0.acceleration.z;
 
-    telemetry.bno055_0.rawQuaternion.x = quat.x();
+    telemetry.bno055_0.rawQuaternion.x = quat.x(); 
     telemetry.bno055_0.rawQuaternion.y = quat.y();
     telemetry.bno055_0.rawQuaternion.z = quat.z();
     telemetry.bno055_0.rawQuaternion.w = quat.w();
 
 
-    QuatCorrect::Quat4d qx;
+    QuatCorrect::Quat4d qx;   // Created redundant representation because of type (Can be fixed later)
     qx.x = telemetry.bno055_0.rawQuaternion.x;
     qx.y = telemetry.bno055_0.rawQuaternion.y;
     qx.z = telemetry.bno055_0.rawQuaternion.z;
@@ -66,8 +66,13 @@ void bno055x0Loop() // Loop function runs during loop in main.
 
     correctedEuler.correctEuler(qx);
 
-    telemetry.pid.input.y = telemetry.bno055_0.processedEuler.x; // Can be removed and variable direct from IMU can be used if memory is an issue.
-    telemetry.pid.input.z = telemetry.bno055_0.processedEuler.y; //  ""       ""
+
+    telemetry.bno055_0.normalizedEuler.y = telemetry.bno055_0.processedEuler.x - telemetry.utility.home.startY; // Starting angle when system is initialized is subtracted to make zero the point of interest.
+    telemetry.bno055_0.normalizedEuler.z = telemetry.bno055_0.processedEuler.y - telemetry.utility.home.startZ; //  ? X is used because the reference coordinate system for the rocket is not aligned with that of the IMU
+
+    telemetry.pid.input.y = telemetry.bno055_0.normalizedEuler.y; // PID inputs set to normalized (corrected & zeroed) Eulers.
+    telemetry.pid.input.z = telemetry.bno055_0.normalizedEuler.z; // Can be removed and variable direct from IMU can be used if memory is an issue.
+
 
     PIDy.Compute();
     PIDz.Compute();

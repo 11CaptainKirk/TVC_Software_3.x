@@ -16,6 +16,7 @@ public:
     Axes rawEuler;
     Axes rawAccel;
     Axes processedEuler;
+    Axes normalizedEuler;
     Axes rawQuaternion;
     Axes processedQuaternion;
 };
@@ -103,11 +104,24 @@ class Utility
         float startAltitude;
         float startY;
         float startZ;
+        float ejectionAltitudeMeters = 50;
+        bool pyro1Status = false;
+        bool pyro2Status = false;
+    };
+        struct Time
+    {
+        short year;
+        byte month;
+        byte day;
+        byte hour;
+        byte minute;
+        byte second;
     };
 
 public:
     Pinouts gpio;
     Default home;
+    Time time;
 };
 
 struct Telemetry
