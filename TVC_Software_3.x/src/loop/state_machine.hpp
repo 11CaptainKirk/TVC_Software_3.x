@@ -167,7 +167,11 @@ static void stateMachine()
         break;
     case ERROR_SD:
         // SD Card Error
-        errorSequence(1, 4);
+        errorSequence(2, 1);
+        break;
+    case ERROR_IMU1:
+        // SD Card Error
+        errorSequence(1, 2);
         break;
     default:
         // THERE IS AN ERROR, CHECK WHAT IT IS

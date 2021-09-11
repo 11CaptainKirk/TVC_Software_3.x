@@ -9,23 +9,23 @@ void errorSequence (int mult, int num){
             digitalWrite(23, LOW);
             delay(50); 
         }
-        delay(2000);
+        delay(1000);
         for (int i = 0; i < mult; i++){            // Multiplier beeps/flashes
             digitalWrite(35, HIGH);
             digitalWrite(23, HIGH);
-            delay(350);
+            delay(200);
             digitalWrite(35, LOW);
             digitalWrite(23, LOW);
-            delay(350); 
+            delay(200); 
         }
-        delay(1000 + 700*(4-mult));
+        delay(500 + 400*(4-mult));
         for (int i = 0; i < num; i++){            // Number beeps/flashes
             digitalWrite(35, HIGH);
             digitalWrite(23, HIGH);
-            delay(500);
+            delay(400);
             digitalWrite(35, LOW);
             digitalWrite(23, LOW);
-            delay(500); 
+            delay(400); 
         }
-        delay(1000 + 1000*(4-num));
+        delay(500 + 800*(4-num));
         }

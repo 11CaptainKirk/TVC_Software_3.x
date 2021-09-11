@@ -36,7 +36,7 @@ SystemState bno055_1(FunctionMode mode)
 {
     if (mode == SETUP)
     {
-        bno055x1Setup();
+        return bno055x1Setup();
     }
     else if (mode == LOOP)
     {
