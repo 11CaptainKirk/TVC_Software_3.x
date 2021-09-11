@@ -14,6 +14,14 @@ bool hasSetDefaults = false;
 float ejectionAltitudeDeltaCheck = 0;
 bool hasSetEjectionAltitudeDeltaCheck = false;
 
+bool hasSavedAltitude = false;  // Only save altitude to detect apogee once.
+float savedAltitude = -1;
+
+const int poweredAccelThreshold = 50;
+const int unpoweredAccelThreshold = -5;
+const int apogeeDetectAltDelta = 3;
+const int ejectionAltitude;
+
 void inFlight()
 {
     writeData();
@@ -63,8 +71,8 @@ static void stateMachine()
         if (buttonRead())
         {
             // Set defaults at current position
-            telemetry.utility.home.startY = telemetry.bno055_0.processedEuler.y;
-            telemetry.utility.home.startZ = telemetry.bno055_0.processedEuler.z;
+            telemetry.utility.home.startY = telemetry.bno055_0.processedEuler.x;
+            telemetry.utility.home.startZ = telemetry.bno055_0.processedEuler.y;
             telemetry.utility.home.startAltitude = telemetry.bmp180.processedValues.altitude;
 
             // Change to countdown system state
@@ -90,18 +98,39 @@ static void stateMachine()
         // Backup ejection code that runs in all states
         failsafeEjection();
 
+        if (telemetry.bno055_0.rawAccel.x >= poweredAccelThreshold){ // Check to see if takeoff has occured
+            systemState = POWERED_ASCENT;
+        }
+
         break;
     case POWERED_ASCENT:
         // Takeoff ( Powered Ascent  |  a > 0  |  v > 0  )
+
+        if (telemetry.bno055_0.rawAccel.x >= poweredAccelThreshold){  // Check to see if motor has burned out
+            systemState = UNPOWERED_ASCENT;
+        }
         break;
-    case APOGEE:
+    case UNPOWERED_ASCENT:
         // Motor Burnout ( Unpowered Ascent  |  a < 0  |  v > 0  )
+    
+        if (!hasSavedAltitude){   // Save altitude
+        savedAltitude = telemetry.bmp180.normalizedValues.altitude;
+        hasSavedAltitude = true;
+        }
+        if (savedAltitude >= telemetry.bmp180.normalizedValues.altitude + apogeeDetectAltDelta){  // Check if current altitude is at least 3m less than saved altitude
+            systemState = BALLISTIC_DESCENT;
+        }
         break;
     case BALLISTIC_DESCENT:
-        // Apogee ( Max Altitude  |  a = 0  |  v = 0  )
+        // Initially at Apogee ( Max Altitude  |  a = 0  |  v = 0  )
+
+        if (telemetry.bmp180.normalizedValues.altitude <= ejectionAltitude){
+            systemState = DROGUE_CHUTE_DESCENT;
+        }
         break;
     case DROGUE_CHUTE_DESCENT:
         // Ballistic Descent ( No Deployment  |  a < 0  |  v < 0  )
+        fireEjection();
         break;
     case MAIN_CHUTE_DESCENT:
         // Drogue Chute Descent ( Drogue Deployment  |  a > 0  |  v < 0  )

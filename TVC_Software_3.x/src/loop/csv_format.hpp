@@ -32,11 +32,18 @@ public:
             + "," + String(telemetry.bno055_0.normalizedEuler.z) 
             + "," + String(telemetry.bmp180.normalizedValues.altitude)   // Filtered Barometric altitude
             + "," + String(telemetry.bmp180.rawValues.temperature)      // Temperature
-            + "," + String(telemetry.neo6m.position.lattitude)          // GPS Coordinates
-            + "," + String(telemetry.neo6m.position.longitude)
+            + "," + String(telemetry.neo6m.position.lattitude, 6)          // GPS Coordinates
+            + "," + String(telemetry.neo6m.position.longitude, 6)
             + "," + String(telemetry.neo6m.position.altitude)           // GPS Altitude
             + "," + String(telemetry.neo6m.misc.numSats)                // Number of Sattelite fixes
             + "," + String(telemetry.utility.home.pyro1Status)          // Pyro channel status
+            + "," + String(telemetry.utility.home.pyro2Status)
+            + "," + String(telemetry.bno055_0.rawAccel.x)               // Raw Acceleration Values
+            + "," + String(telemetry.bno055_0.rawAccel.y)
+            + "," + String(telemetry.bno055_0.rawAccel.z)
+            + "," + String(telemetry.bno055_0.rawEuler.x)               // Raw Euler Angles
+            + "," + String(telemetry.bno055_0.rawEuler.y)
+            + "," + String(telemetry.bno055_0.rawEuler.z)          // Pyro channel status
             + "," + String(telemetry.utility.home.pyro2Status);
         return dataOut;
     }

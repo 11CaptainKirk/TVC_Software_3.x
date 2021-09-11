@@ -29,11 +29,17 @@ void csvHeaderPrint() {
     Serial.print(F(","));
     Serial.print(F("Pyro 2 Status"));  //
     Serial.print(F(","));
-    Serial.print(F("Raw Euler X"));
+    Serial.print(F("Raw Accel X"));  //
     Serial.print(F(","));
-    Serial.print(F("Raw Euler Y")); 
+    Serial.print(F("Raw Accel Y"));  //
     Serial.print(F(","));
-    Serial.print(F("Raw Euler Z"));
+    Serial.print(F("Raw Accel Z"));  //
+    Serial.print(F(","));
+    Serial.print(F("Raw Euler X")); //
+    Serial.print(F(","));
+    Serial.print(F("Raw Euler Y")); //
+    Serial.print(F(","));
+    Serial.print(F("Raw Euler Z")); //
     Serial.print(F(","));
     Serial.print(F("Corrected Euler X"));
     Serial.print(F(","));

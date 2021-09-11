@@ -42,15 +42,18 @@ void bno055x0Loop() // Loop function runs during loop in main.
     sensors_event_t IMUreadingx0;
     bno055x0.getEvent(&IMUreadingx0);
 
+    sensors_event_t IMUreadingx0A;
+    bno055x0.getEvent(&IMUreadingx0A, Adafruit_BNO055::VECTOR_LINEARACCEL);
+
     imu::Quaternion quat = bno055x0.getQuat();
     // Set Values to telemetry object.
     telemetry.bno055_0.rawEuler.x = IMUreadingx0.orientation.x;  // Get orientation readings (Euler [not usable because of gimbal lock])
     telemetry.bno055_0.rawEuler.y = IMUreadingx0.orientation.y;
     telemetry.bno055_0.rawEuler.z = IMUreadingx0.orientation.z;
 
-    telemetry.bno055_0.rawAccel.x = IMUreadingx0.acceleration.x; // Get acceleration Readings
-    telemetry.bno055_0.rawAccel.y = IMUreadingx0.acceleration.y;
-    telemetry.bno055_0.rawAccel.z = IMUreadingx0.acceleration.z;
+    telemetry.bno055_0.rawAccel.x = IMUreadingx0A.acceleration.x; // Get acceleration Readings
+    telemetry.bno055_0.rawAccel.y = IMUreadingx0A.acceleration.y;
+    telemetry.bno055_0.rawAccel.z = IMUreadingx0A.acceleration.z;
 
     telemetry.bno055_0.rawQuaternion.x = quat.x(); 
     telemetry.bno055_0.rawQuaternion.y = quat.y();
