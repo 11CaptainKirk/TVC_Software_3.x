@@ -6,6 +6,7 @@
 #include <utility/smart_pulse_LED.hpp>
 #include <utility/button_read.hpp>
 #include <utility/ejection.hpp>
+#include <utility/error_sequence.hpp>
 
 #ifndef STATE_MACHINE_HPP
 #define STATE_MACHINE_HPP
@@ -166,8 +167,7 @@ static void stateMachine()
         break;
     case ERROR_SD:
         // SD Card Error
-        smartPulseLED(35, 100, 50);
-        smartPulseBuzzer(23, 100, 50);
+        errorSequence(1, 4);
         break;
     default:
         // THERE IS AN ERROR, CHECK WHAT IT IS
