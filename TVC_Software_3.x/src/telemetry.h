@@ -14,6 +14,7 @@ class IMU
 
 public:
     Axes rawEuler;
+    Axes rawAccel;
     Axes processedEuler;
     Axes rawQuaternion;
     Axes processedQuaternion;

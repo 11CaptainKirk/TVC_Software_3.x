@@ -46,10 +46,12 @@ static void stateMachine()
         smartPulseLED(35, 200, 200);
         smartPulseBuzzer(23, 200, 200);
         inFlight();
+        servo(LOOP);
         if (!buttonRead())
         {
             systemState = GROUND_IDLE;
         }
+        
         break;
     case POWERED_ASCENT:
         // Takeoff ( Powered Ascent  |  a > 0  |  v > 0  )
@@ -68,6 +70,11 @@ static void stateMachine()
         break;
     case TOUCHDOWN:
         // Main Chute Descent ( Main Deployment  |  a > 0  |  v < 0  )
+        break;
+    case ERROR_SD:
+        // SD Card Error
+        smartPulseLED(35, 100, 50);
+        smartPulseBuzzer(23, 100, 50);
         break;
     default:
         // THERE IS AN ERROR, CHECK WHAT IT IS

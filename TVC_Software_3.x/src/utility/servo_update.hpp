@@ -35,7 +35,6 @@ void servoLoop()
         servoY.write(telemetry.utility.home.gimbalOffsetY + telemetry.pid.output.y);
     }
 
-    Serial.print(telemetry.pid.output.z);
      if (telemetry.pid.output.z > 10){  // Update Z Servo 
         servoZ.write(telemetry.utility.home.gimbalOffsetZ + telemetry.utility.home.gimbalMaxZ);
     }

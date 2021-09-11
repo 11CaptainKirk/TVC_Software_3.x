@@ -48,6 +48,10 @@ void bno055x0Loop() // Loop function runs during loop in main.
     telemetry.bno055_0.rawEuler.y = IMUreadingx0.orientation.y;
     telemetry.bno055_0.rawEuler.z = IMUreadingx0.orientation.z;
 
+    telemetry.bno055_0.rawAccel.x = IMUreadingx0.acceleration.x;
+    telemetry.bno055_0.rawAccel.y = IMUreadingx0.acceleration.y;
+    telemetry.bno055_0.rawAccel.z = IMUreadingx0.acceleration.z;
+
     telemetry.bno055_0.rawQuaternion.x = quat.x();
     telemetry.bno055_0.rawQuaternion.y = quat.y();
     telemetry.bno055_0.rawQuaternion.z = quat.z();
