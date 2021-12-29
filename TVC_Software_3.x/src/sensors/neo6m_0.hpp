@@ -21,8 +21,7 @@ SystemState neo6mLoop()
         {
             while (!gpsReady && !gps.location.isValid())  // Add something to check if the location has not been valid in ~ 5 secs and throw error for warning beeps. 
             {
-                //delay(100);
-                return INITIALIZING;
+                return INITIALIZING; 
             }
             if (gps.location.isValid())
             {
